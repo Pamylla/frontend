@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useState, useContext } from "react";
 
-import api from "../services/apiClient";
+import api from "../services/api";
 
 interface Company {
   name: string;
@@ -46,7 +46,6 @@ export const AuthProvider: React.FC = ({ children }) => {
       password,
     });
 
-    debugger;
     const { company, token } = response.data;
 
     localStorage.setItem("@Kiwi:token", token);
