@@ -12,7 +12,7 @@ import { useToast } from "../../hooks/toast";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 
-// const logoImg = require("../../assets/logo.svg");
+import logo from "../../assets/kiwi.png";
 
 interface SignUpFormData {
   name: string;
@@ -85,7 +85,7 @@ const SignUp: React.FC = () => {
 
       <Content>
         <AnimationContainer>
-          {/* <img src={logo} alt="GoBarber" /> */}
+          <img src={logo} alt="logo" width={150} />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Faça seu cadastro</h1>

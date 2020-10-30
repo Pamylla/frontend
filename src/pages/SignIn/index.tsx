@@ -13,7 +13,7 @@ import { useToast } from "../../hooks/toast";
 
 import getValidationErrors from "../../utils/getValidationError";
 
-// const logoImg = require("../../assets/logo.svg");
+import logo from "../../assets/kiwi.png";
 
 interface SignInFormData {
   email: string;
@@ -67,7 +67,7 @@ const SignIn: React.FC = () => {
     <Container>
       <Content>
         <AnimationContainer>
-          {/* <img src={logo} alt="GoBarber" /> */}
+          <img src={logo} alt="logo" width={150} />
 
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Faça seu logon</h1>

@@ -9,7 +9,7 @@ import { useToast } from "../../hooks/toast";
 
 import getValidationErrors from "../../utils/getValidationError";
 
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/kiwi.png";
 
 import Input from "../../components/Input";
 import Button from "../../components/Button";
@@ -87,7 +87,7 @@ const ResetPassword: React.FC = () => {
     <Container>
       <Content>
         <AnimationContainer>
-          <img src={logo} alt="GoBarber" />
+          <img src={logo} alt="logo" width={150} />
           <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Resetar senha</h1>
 

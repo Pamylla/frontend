@@ -5,6 +5,7 @@ import api from "../services/api";
 interface Company {
   name: string;
   email: string;
+  avatar: string;
 }
 
 interface SignInCredencials {

@@ -37,7 +37,7 @@ export const AnimationContainer = styled.div`
   animation: ${appearFromRight} 0.7s;
 
   form {
-    margin: 80px 0;
+    margin: 20px 0;
     width: 340px;
     display: flex;
     flex-direction: column;
