@@ -19,7 +19,7 @@ import api from "../../services/api";
 
 interface ResetPasswordFormData {
   password: string;
-  password_confirmation: string;
+  confirmPassword: string;
 }
 
 const ResetPassword: React.FC = () => {
@@ -39,14 +39,14 @@ const ResetPassword: React.FC = () => {
 
         const schema = Yup.object().shape({
           password: Yup.string().required("Nova senha obrigatória"),
-          password_confirmation: Yup.string(),
+          confirmPassword: Yup.string(),
         });
 
         await schema.validate(data, {
           abortEarly: false,
         });
 
-        const { password, password_confirmation } = data;
+        const { password, confirmPassword } = data;
         const token = location.search.replace("?token=", "");
 
         if (!token) {
@@ -55,7 +55,7 @@ const ResetPassword: React.FC = () => {
 
         await api.post("/password/reset", {
           password,
-          password_confirmation,
+          confirmPassword,
           token,
         });
 
