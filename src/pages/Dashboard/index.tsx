@@ -12,14 +12,11 @@ import {
 
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
-import Header from "../../components/Header";
-
 import { Container, Time } from "./styles";
 
 const Dashboard: React.FC = () => {
   return (
     <Container>
-      <Header />
       <header>
         <button type="button">
           <MdChevronLeft color="fff" size={36} />
