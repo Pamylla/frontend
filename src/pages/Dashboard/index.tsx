@@ -1,23 +1,47 @@
-import React, { useState, useMemo, useEffect } from "react";
-import {
-  format,
-  subDays,
-  addDays,
-  setHours,
-  setMinutes,
-  setSeconds,
-  isBefore,
-  parseISO,
-} from "date-fns";
+import React from "react";
 
+import { FiPower } from "react-icons/fi";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { Link } from "react-router-dom";
 
-import { Container, Time } from "./styles";
+import {
+  Container,
+  Header,
+  HeaderContent,
+  Profile,
+  Time,
+  QueueDate,
+} from "./styles";
+
+import api from "../../services/api";
+
+import { useAuth } from "../../hooks/auth";
 
 const Dashboard: React.FC = () => {
+  const { company, signOut } = useAuth();
+
   return (
     <Container>
-      <header>
+      <Header>
+        <HeaderContent>
+          <Profile>
+            <img src={company.avatar} alt={company.name} />
+
+            <div>
+              <span>Bem-vindo,</span>
+              <Link to="/profile">
+                <strong>{company.name}</strong>
+              </Link>
+            </div>
+          </Profile>
+
+          <button type="button" onClick={signOut}>
+            <FiPower />
+          </button>
+        </HeaderContent>
+      </Header>
+
+      <QueueDate>
         <button type="button">
           <MdChevronLeft color="fff" size={36} />
         </button>
@@ -25,7 +49,8 @@ const Dashboard: React.FC = () => {
         <button type="button">
           <MdChevronRight color="fff" size={36} />
         </button>
-      </header>
+      </QueueDate>
+
       <ul>
         <Time>
           <strong>Pamylla</strong>

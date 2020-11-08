@@ -5,6 +5,7 @@ import { Form } from "@unform/web";
 import { FormHandles } from "@unform/core";
 import * as Yup from "yup";
 
+import { id } from "date-fns/locale";
 import api from "../../services/api";
 
 import { useToast } from "../../hooks/toast";
@@ -23,7 +24,7 @@ interface ProfileFormData {
   email: string;
   oldPassword: string;
   password: string;
-  confirmPassword: string;
+  confirmPassword?: string;
 }
 
 const Profile: React.FC = () => {
@@ -46,18 +47,19 @@ const Profile: React.FC = () => {
           email: Yup.string()
             .email("Digite um e-mail válido")
             .required("E-mail obrigatório"),
-          old_password: Yup.string(),
-          password: Yup.string().when("old_password", {
+          oldPassword: Yup.string(),
+          password: Yup.string().when("oldPassword", {
             is: val => !!val.length,
             then: Yup.string().required("Campo obrigatório"),
             otherwise: Yup.string(),
           }),
-          password_confirmation: Yup.string().when("old_password", {
-            is: val => !!val.length,
-            then: Yup.string().required("Campo obrigatório"),
-            otherwise: Yup.string(),
-          }),
-          // .oneOf([Yup.ref("password"), null], "Confirmação incorreta"),
+          confirmPassword: Yup.string()
+            .when("oldPassword", {
+              is: val => !!val.length,
+              then: Yup.string().required("Campo obrigatório"),
+              otherwise: Yup.string(),
+            })
+            .oneOf([Yup.ref("password")]),
         });
 
         await schema.validate(data, {
@@ -80,7 +82,9 @@ const Profile: React.FC = () => {
             : {}),
         };
 
-        const response = await api.put("/profile", formData);
+        localStorage.getItem("companyId");
+
+        const response = await api.put("company/:companyId", formData);
 
         updateUser(response.data);
 
@@ -172,7 +176,7 @@ const Profile: React.FC = () => {
           <Input name="email" icon={FiMail} type="text" placeholder="E-mail" />
 
           <Input
-            name="old_password"
+            name="oldPassword"
             icon={FiLock}
             type="password"
             placeholder="Senha atual"
@@ -186,7 +190,7 @@ const Profile: React.FC = () => {
           />
 
           <Input
-            name="password_confirmation"
+            name="confirmPassword"
             icon={FiLock}
             type="password"
             placeholder="Confirmar senha"
